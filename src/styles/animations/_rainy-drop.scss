@@ -1,0 +1,15 @@
+@keyframes rainy-drop {
+    50% {
+        height: 45px;
+        opacity: 0;
+    }
+
+    51% {
+        opacity: 0;
+    }
+
+    100% {
+        height: 1px;
+        opacity: 0;
+    }
+}

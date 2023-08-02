@@ -1,0 +1,21 @@
+@use "sass:map";
+
+
+$color: (
+    "background-primary": #121f3f,
+    "background-bright": #ff5288,
+    "border-primary": #121f3f,
+    "background-secondary": #ff9f00,
+);
+
+@function getColor($name) {
+    $result: map.get($color, $name);
+
+    @if ($result) {
+        @return $result;
+    }
+
+    @else {
+        @return black;
+    }
+}

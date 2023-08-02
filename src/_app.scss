@@ -1,0 +1,27 @@
+@import '/src/styles/variables/import';
+@import '/src/styles/mixins/import';
+
+
+.app-layout-container {
+    @include app-grid-columns;
+    grid-template-rows: auto 1fr auto;
+
+    min-height: 100vh;
+
+    .content {
+        grid-column: 2/3;
+
+        padding-block-start: 1rem;
+    }
+
+    footer {
+        grid-row: 3/4;
+        grid-column: 1/-1;
+
+        box-shadow: inset 0px -5px 5px -2px  #161616;
+        background-color: getColor("background-bright");
+        color: white;
+        text-align: center;
+        padding: 1rem .5rem;
+    }
+}

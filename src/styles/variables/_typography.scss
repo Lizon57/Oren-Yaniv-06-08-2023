@@ -1,0 +1,24 @@
+@use "sass:map";
+
+@font-face {
+    font-family: merriweather;
+    src: url("../../assets/fonts/merriweather.ttf");
+}
+
+
+$typography: (
+    "emphasis": merriweather,
+    "regular": arial,
+);
+
+@function getTypography($name) {
+    $result: map.get($typography, $name);
+
+    @if ($result) {
+        @return $result;
+    }
+
+    @else {
+        @return merriweather;
+    }
+}

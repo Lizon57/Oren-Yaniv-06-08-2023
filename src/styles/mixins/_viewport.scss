@@ -1,0 +1,46 @@
+@mixin viewport-wide-range($minDeviceWide, $maxDeviceWide, $isInclusive: true) {
+    @if ($isInclusive) {
+        @media only screen and (max-width: #{$maxDeviceWide + 1}px) and (min-width: #{$minDeviceWide + 1}px) {
+            @content;
+        }
+    }
+
+    @else {
+        @media only screen and (max-width: #{$maxDeviceWide}px) and (min-width: #{$minDeviceWide}px) {
+            @content;
+        }
+    }
+}
+
+
+@mixin viewport-wide-up-to($maxDeviceWide, $isInclusive: true) {
+    @if ($isInclusive) {
+        @media only screen and (max-width: #{$maxDeviceWide - 1}px) {
+            @content;
+        }
+
+    }
+
+    @else {
+        @media only screen and (max-width: #{$maxDeviceWide}px) {
+            @content;
+        }
+    }
+}
+
+
+@mixin viewport-wide-start-from($minDeviceWide, $isInclusive: true) {
+    @if ($isInclusive) {
+        @debug $isInclusive;
+
+        @media only screen and (min-width: #{$minDeviceWide + 1}px) {
+            @content;
+        }
+    }
+
+    @else {
+        @media only screen and (min-width: #{$minDeviceWide}px) {
+            @content;
+        }
+    }
+}

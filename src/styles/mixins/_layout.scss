@@ -1,0 +1,6 @@
+@mixin app-grid-columns {
+    $side-size: minmax(0.5rem, 1fr);
+
+    display: grid;
+    grid-template-columns: $side-size minmax(auto, 1300px) $side-size;
+}

@@ -1,0 +1,22 @@
+@use "sass:map";
+
+
+$viewport: (
+    "tiny": 500,
+    "small": 768,
+    "medium": 1160,
+    "large": 1264,
+    "wide": 1920
+);
+
+@function getViewport($name) {
+    $result: map.get($viewport, $name);
+
+    @if ($result) {
+        @return $result;
+    }
+
+    @else {
+        @return 1920;
+    }
+}
