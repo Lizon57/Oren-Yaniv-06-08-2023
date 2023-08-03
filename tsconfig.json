@@ -21,7 +21,11 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Addon */
-    "types": ["vite-plugin-svgr/client"]
+    "types": ["vite-plugin-svgr/client"],
+    "baseUrl": ".",
+    "paths": {
+      "@*": ["src/*"],
+    },
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

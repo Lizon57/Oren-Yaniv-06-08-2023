@@ -67,7 +67,7 @@
   }
 
   .text {
-    color: #9ea1a4;
+    color: getColor("text-secondary");
     letter-spacing: 1px;
     text-align: center;
     margin-block-start: 1rem;

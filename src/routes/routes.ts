@@ -1,9 +1,9 @@
 import { lazy } from "react"
-import { makeId } from "../services/util/make-id"
+import { makeId } from "@/services/util/make-id"
 
 
-const Homepage = lazy(() => import('../views/homepage/homepage'))
-const Favorites = lazy(() => import('../views/favorites/favorites'))
+const Homepage = lazy(() => import('@/views/homepage/homepage'))
+const Favorites = lazy(() => import('@/views/favorites/favorites'))
 
 
 export const routes = [

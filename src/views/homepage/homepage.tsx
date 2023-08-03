@@ -1,4 +1,4 @@
-import { LocationSearch } from "../../cmps/common/location-search/location-search"
+import { LocationSearch } from "@/cmps/homepage/location-search/location-search"
 import './style.scss'
 
 
@@ -7,7 +7,7 @@ export default function Homepage() {
         <main className="views--homepage__container">
             <h2>Just pick a location</h2>
             <h3>we'll do the trick</h3>
-            <LocationSearch initialTerm="Tel-Aviv, Israel" />
+            <LocationSearch initialTerm="Tel-Aviv" />
         </main>
     )
 }

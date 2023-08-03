@@ -1,6 +1,5 @@
 import classNames from 'classnames'
-import { ICON_PATH_MAP } from '../../../constants/icon-path-map'
-// import './style.scss'
+import { ICON_PATH_MAP } from '@/constants/icon-path-map'
 
 
 export function Icon({ name, title, size, classList, onClick }: Props) {
