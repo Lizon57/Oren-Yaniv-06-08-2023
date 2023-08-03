@@ -8,6 +8,8 @@
   transform: translate(-50%, -50%);
 
   .loader-animation {
+    position: relative;
+
     margin: 0 auto;
     width: 7rem;
     height: 7rem;
@@ -45,7 +47,7 @@
     .rain {
       position: absolute;
       left: 50%;
-      bottom: 1.5rem;
+      bottom: -1.5rem;
       transform: translateX(-50%);
 
       .drop {
@@ -70,7 +72,7 @@
     color: getColor("text-secondary");
     letter-spacing: 1px;
     text-align: center;
-    margin-block-start: 1rem;
-    width: max-content;
+    margin-block-start: 2rem;
+    max-width: 15rem;
   }
 }

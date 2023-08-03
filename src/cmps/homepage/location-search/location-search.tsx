@@ -5,13 +5,17 @@ import { GroupBase, OptionsOrGroups, SingleValue } from 'react-select'
 import { aweatherService } from "@/services/aweather.service"
 import { AweatherAutocompleteResponse } from "@/models/aweather-autocomplete-response"
 
+import { setSelectedCity } from "@/store/actions/weather.action"
+
 import { LocationSearchOption } from "@/models/location-search-option"
+import { SelectedCity } from "@/models/selected-city"
+
 import { Icon } from "@/cmps/common/icon/icon"
 import { LocationPreview } from "./location-preview"
 import './styles.scss'
 
 
-export function LocationSearch({ initialTerm }: Props) {
+export function LocationSearch() {
     const debouncedLoadOptions = useDebouncedCallback(loadOptions, 300)
 
 
@@ -44,15 +48,28 @@ export function LocationSearch({ initialTerm }: Props) {
         })
     }
 
-    const onSelcetOption = (option: SingleValue<unknown>) => {
+    const onSelcetOption = (option: SingleValue<LocationSearchOption>) => {
+        if (!option) {
+            setSelectedCity()
+            return
+        }
         console.log(option)
+
+        const city: SelectedCity = {
+            id: option.value,
+            name: option.label,
+            country: {
+                code: option.country.code,
+                name: option.country.name
+            }
+        }
+        setSelectedCity(city)
     }
 
 
     return (
         <div className="homepage--location-search__container" title="Search a location">
             <AsyncSelect
-                defaultInputValue={initialTerm}
                 loadOptions={debouncedLoadOptions}
                 styles={customStyles}
                 formatOptionLabel={option => <LocationPreview option={option} />}
@@ -94,9 +111,4 @@ const customStyles = {
         fontSize: '0.8rem',
         padding: '2px'
     }),
-}
-
-
-type Props = {
-    initialTerm?: string
 }
