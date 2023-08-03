@@ -130,7 +130,7 @@ const getLocationByLatLon = async (lat: string, lon: string) => {
             id: response.Key,
             name: response.LocalizedName,
             country: {
-                code: response.Country.ID,
+                code: response.Country.ID.toLocaleLowerCase(),
                 name: response.Country.LocalizedName
             }
         }

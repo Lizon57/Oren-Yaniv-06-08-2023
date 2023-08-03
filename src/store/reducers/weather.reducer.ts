@@ -1,9 +1,10 @@
+import { INITIAL_SELECTED_CITY } from "@/constants/initial-selected-city"
 import { ReduxAction } from "@/models/redux-action"
 import { SelectedCity } from "@/models/selected-city"
 
 
 const initialState: WeatherReducer = {
-    selectedCity: undefined
+    selectedCity: INITIAL_SELECTED_CITY
 }
 
 

@@ -1,0 +1,30 @@
+@import "/src/styles/variables/import";
+@import "/src/styles/animations/import";
+
+
+.homepage--favorite-indicator__container {
+    display: flex;
+    align-items: center;
+
+    position: relative;
+
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+    padding: 0;
+
+    font-size: 0.8rem;
+    color: getColor("text-secondary");
+
+    .common--icon__container {
+        position: relative;
+        top: 5px;
+        left: 5px;
+
+        &.favorite {
+            color: getColor("red-primary");
+            transition: transform .3s;
+            animation: pulse .2s forwards 1;
+        }
+    }
+}

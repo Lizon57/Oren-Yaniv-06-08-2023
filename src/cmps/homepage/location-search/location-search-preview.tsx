@@ -2,9 +2,9 @@ import { LocationSearchOption } from "@/models/location-search-option"
 import './styles.scss'
 
 
-export function LocationPreview({ option }: Props) {
+export function LocationSearchPreview({ option }: Props) {
     return (
-        <div className="homepage--location-preview__container">
+        <div className="homepage--location-search-preview__container">
             <span className="suggest-city">{option.label}</span>
 
             <div className="country">

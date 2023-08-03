@@ -1,8 +1,10 @@
 import { useDebouncedCallback } from "use-debounce"
 import AsyncSelect from 'react-select/async'
-import { GroupBase, OptionsOrGroups, SingleValue } from 'react-select'
+import { useState } from "react"
+import { GroupBase, OptionsOrGroups, SingleValue, StylesConfig } from 'react-select'
 
 import { aweatherService } from "@/services/aweather.service"
+import { stripStringToEnglishLetter } from "@/services/util/strip-string-to-english-letter"
 import { AweatherAutocompleteResponse } from "@/models/aweather-autocomplete-response"
 
 import { setSelectedCity } from "@/store/actions/weather.action"
@@ -11,11 +13,13 @@ import { LocationSearchOption } from "@/models/location-search-option"
 import { SelectedCity } from "@/models/selected-city"
 
 import { Icon } from "@/cmps/common/icon/icon"
-import { LocationPreview } from "./location-preview"
+import { LocationSearchPreview } from "./location-search-preview"
 import './styles.scss'
+import classNames from "classnames"
 
 
 export function LocationSearch() {
+    const [isValid, setIsValid] = useState(true)
     const debouncedLoadOptions = useDebouncedCallback(loadOptions, 300)
 
 
@@ -43,7 +47,8 @@ export function LocationSearch() {
         callback: (options: OptionsOrGroups<LocationSearchOption, GroupBase<LocationSearchOption>>) => void
     ) {
         return new Promise<LocationSearchOption[]>(async () => {
-            const options = await getOptions(pharse)
+            const stripPharse = stripStringToEnglishLetter(pharse)
+            const options = await getOptions(stripPharse)
             if (options) callback(options)
         })
     }
@@ -53,7 +58,6 @@ export function LocationSearch() {
             setSelectedCity()
             return
         }
-        console.log(option)
 
         const city: SelectedCity = {
             id: option.value,
@@ -66,21 +70,34 @@ export function LocationSearch() {
         setSelectedCity(city)
     }
 
+    const validateInput = (value: string) => {
+        if (!value && !isValid) {
+            setIsValid(true)
+            return
+        } else if (!value) return
+
+        const englishRegex = /^[A-Za-z]+$/
+        const isEnglishLettersOnly = englishRegex.test(value)
+        if (!isEnglishLettersOnly && isValid) setIsValid(false)
+    }
+
 
     return (
         <div className="homepage--location-search__container" title="Search a location">
             <AsyncSelect
+                className={classNames({ unValidInput: !isValid })}
                 loadOptions={debouncedLoadOptions}
                 styles={customStyles}
-                formatOptionLabel={option => <LocationPreview option={option} />}
+                formatOptionLabel={option => <LocationSearchPreview option={option as LocationSearchOption} />}
                 placeholder={<Placeholder />}
                 noOptionsMessage={({ inputValue }) => inputValue.length
                     ? `Sorry, we couldn't find any city name starts with "${inputValue}"`
-                    : 'Type to active autocomplete'}
+                    : 'Typehead input'}
                 loadingMessage={({ inputValue }) => <div>Searching for a city name starting with "{inputValue}"</div>}
+                onChange={value => onSelcetOption(value as SingleValue<LocationSearchOption>)}
+                onInputChange={value => validateInput(value)}
                 isClearable
                 cacheOptions
-                onChange={value => onSelcetOption(value)}
             />
         </div>
     )
@@ -90,25 +107,34 @@ export function LocationSearch() {
 function Placeholder() {
     return (
         <div className="homepage--location-search__placeholder">
-            <Icon name="location" size="32" />
+            <Icon name="location" size="22" />
             <span className="text">Search for a city</span>
         </div>
     )
 }
 
 
-const customStyles = {
+const customStyles: StylesConfig = {
     indicatorSeparator: () => ({
         display: 'none'
     }),
-    option: (provided: any, { isFocused }: any) => ({
+    option: (provided, { isFocused }) => ({
         ...provided,
+        cursor: 'pointer',
         backgroundColor: isFocused ? '#121f3f' : 'transparent',
         color: isFocused ? '#fafafa' : '#222',
     }),
-    noOptionsMessage: (provided: any) => ({
+    noOptionsMessage: (provided) => ({
         ...provided,
         fontSize: '0.8rem',
         padding: '2px'
     }),
+    control: (base) => ({
+        ...base,
+        boxShadow: 'none',
+        border: '1px solid #9ea1a4',
+        '&:hover': {
+            borderColor: '#9ea1a4',
+        }
+    })
 }

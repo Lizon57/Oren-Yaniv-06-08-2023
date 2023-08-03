@@ -1,5 +1,17 @@
 @import "../variables/typography";
 
+
+@font-face {
+    font-family: merriweather;
+    src: url("/src/assets/fonts/merriweather.ttf");
+}
+
+@font-face {
+    font-family: rem;
+    src: url("/src/assets/fonts/rem.ttf");
+}
+
+
 * {
     box-sizing: border-box;
 }

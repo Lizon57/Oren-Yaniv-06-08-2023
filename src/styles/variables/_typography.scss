@@ -1,13 +1,9 @@
 @use "sass:map";
 
-@font-face {
-    font-family: merriweather;
-    src: url("../../assets/fonts/merriweather.ttf");
-}
-
 
 $typography: (
-    "emphasis": merriweather,
+    "brand": merriweather,
+    "emphasis": rem,
     "regular": arial,
 );
 
@@ -19,6 +15,6 @@ $typography: (
     }
 
     @else {
-        @return merriweather;
+        @return arial;
     }
 }

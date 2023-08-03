@@ -7,6 +7,8 @@ $color: (
     "border-primary": #121f3f,
     "background-secondary": #ff9f00,
     "text-secondary": #9ea1a4,
+    "red-primary": #ff3040,
+    "error-primary": #ff3040,
 );
 
 @function getColor($name) {
