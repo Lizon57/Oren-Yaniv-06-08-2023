@@ -1,3 +1,4 @@
+import isEqual from 'lodash/isEqual'
 import { store } from "../store"
 import { aweatherService } from "@/services/aweather.service"
 import { SelectedCity } from "@/models/selected-city"
@@ -6,6 +7,11 @@ import { INITIAL_SELECTED_CITY } from "@/constants/initial-selected-city"
 
 export const setSelectedCity = (city?: SelectedCity) => {
     if (!city) return
+
+    const currSelectedCity = store.getState().weatherModule.selectedCity
+    const isEqualCurrSelected = isEqual(currSelectedCity, city)
+    if (isEqualCurrSelected) return
+
     store.dispatch({ type: 'setSelectedCity', city })
 }
 
@@ -26,9 +32,9 @@ export const setInitialSelectedCity = () => {
             console.log(err)
         }
     }
-    
-    
-    function onFailGetUserGeo(){
+
+
+    function onFailGetUserGeo() {
         setSelectedCity(INITIAL_SELECTED_CITY)
     }
 }

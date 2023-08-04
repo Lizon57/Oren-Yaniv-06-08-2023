@@ -1,20 +1,38 @@
 import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
 
 import { RootState } from '@/store/store'
 
+import { aweatherService } from '@/services/aweather.service'
 import { SelectedCity } from '@/models/selected-city'
+import { LocationForecast } from '@/models/location-forecast'
 
-import './style.scss'
 import { FavoriteIndicator } from './favorite-indicator/favorite-indicator'
+import { ForecastList } from '@/cmps/homepage/forecast/forcast-list'
+import './style.scss'
 
 
 export function LocationPreview() {
     const selectedCity: SelectedCity = useSelector((state: RootState) => state.weatherModule.selectedCity)
+    const [forecast, setForecast] = useState<LocationForecast>()
+
+
+    const fetchData = async (id: string) => {
+        try {
+            const forecast = await aweatherService.getLocationForecast(id)
+            setForecast(forecast)
+        } catch (err) {
+        }
+    }
+
+    useEffect(() => {
+        fetchData(selectedCity.id)
+    }, [selectedCity])
 
 
     return (
         <div className="homepage--location-preview__container">
-            <div className="info">
+            <section className="info">
                 <div className="status">
                     <span className="weather-image">
                         <img src="https://developer.accuweather.com/sites/default/files/07-s.png" />
@@ -38,11 +56,9 @@ export function LocationPreview() {
                 <div className="options">
                     <FavoriteIndicator initialState={false} />
                 </div>
-            </div>
+            </section>
 
-            <div className="forecasts">
-                <h2>5 days forecasts</h2>
-            </div>
+            {forecast && <ForecastList forecast={forecast} />}
         </div>
     )
 }

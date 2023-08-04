@@ -83,7 +83,7 @@ export function LocationSearch() {
 
 
     return (
-        <div className="homepage--location-search__container" title="Search a location">
+        <section className="homepage--location-search__container" title="Search a location">
             <AsyncSelect
                 className={classNames({ unValidInput: !isValid })}
                 loadOptions={debouncedLoadOptions}
@@ -99,7 +99,7 @@ export function LocationSearch() {
                 isClearable
                 cacheOptions
             />
-        </div>
+        </section>
     )
 }
 

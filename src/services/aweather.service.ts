@@ -1,7 +1,15 @@
 const apikey: string = import.meta.env.VITE_APP_AWEATHER_API_KEY as string
-import { AWEATHER_BASE_URL } from '@/constants/aweather-base-url'
-import { localStorageService } from './localstorage.service'
+
 import { httpService } from './http.service'
+import { localStorageService } from './localstorage.service'
+
+import { LocationByLatLonResponse } from '@/models/location-by-lat-lon-response'
+import { LocationForecastResponse } from '@/models/location-forecast-response'
+
+import { AWEATHER_BASE_URL } from '@/constants/aweather-base-url'
+
+import { ConvertTemperatureUnit } from './util/convert-temperatur-unit'
+import { convertDateToDayName } from './util/convert-date-to-day-name'
 
 
 const getAutocompleteOptions = async (pharse: string) => {
@@ -55,7 +63,7 @@ const getAutocompleteOptions = async (pharse: string) => {
 
 const getLocationByLatLon = async (lat: string, lon: string) => {
     // For debug: have response for Hadera lat, lon search
-    const response = {
+    const response: LocationByLatLonResponse = {
         "Version": 1,
         "Key": "213124",
         "Type": "City",
@@ -126,14 +134,7 @@ const getLocationByLatLon = async (lat: string, lon: string) => {
         // const url = `${AWEATHER_BASE_URL}locations/v1/cities/geoposition/search?q=${lat},${lon}`
         // const response = await httpService.get(url, { apikey })
 
-        const responseToSave = {
-            id: response.Key,
-            name: response.LocalizedName,
-            country: {
-                code: response.Country.ID.toLocaleLowerCase(),
-                name: response.Country.LocalizedName
-            }
-        }
+        const responseToSave = _formatLocationByLatLonResponse(response)
 
         localStorageService.addToMap('locationByLatLon', latLon, responseToSave)
         return responseToSave
@@ -143,9 +144,236 @@ const getLocationByLatLon = async (lat: string, lon: string) => {
 }
 
 
+const getLocationForecast = async (id: string) => {
+    const response: LocationForecastResponse = {
+        "Headline": {
+            "EffectiveDate": "2023-08-04T20:00:00+03:00",
+            "EffectiveEpochDate": 1691168400,
+            "Severity": 7,
+            "Text": "Warm Friday night",
+            "Category": "heat",
+            "EndDate": "2023-08-05T08:00:00+03:00",
+            "EndEpochDate": 1691211600,
+            "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?lang=en-us",
+            "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?lang=en-us"
+        },
+        "DailyForecasts": [
+            {
+                "Date": "2023-08-04T07:00:00+03:00",
+                "EpochDate": 1691121600,
+                "Temperature": {
+                    "Minimum": {
+                        "Value": 80,
+                        "Unit": "F",
+                        "UnitType": 18
+                    },
+                    "Maximum": {
+                        "Value": 91,
+                        "Unit": "F",
+                        "UnitType": 18
+                    }
+                },
+                "Day": {
+                    "Icon": 1,
+                    "IconPhrase": "Sunny",
+                    "HasPrecipitation": false
+                },
+                "Night": {
+                    "Icon": 34,
+                    "IconPhrase": "Mostly clear",
+                    "HasPrecipitation": false
+                },
+                "Sources": [
+                    "AccuWeather"
+                ],
+                "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=1&lang=en-us",
+                "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=1&lang=en-us"
+            },
+            {
+                "Date": "2023-08-05T07:00:00+03:00",
+                "EpochDate": 1691208000,
+                "Temperature": {
+                    "Minimum": {
+                        "Value": 78,
+                        "Unit": "F",
+                        "UnitType": 18
+                    },
+                    "Maximum": {
+                        "Value": 90,
+                        "Unit": "F",
+                        "UnitType": 18
+                    }
+                },
+                "Day": {
+                    "Icon": 2,
+                    "IconPhrase": "Mostly sunny",
+                    "HasPrecipitation": false
+                },
+                "Night": {
+                    "Icon": 34,
+                    "IconPhrase": "Mostly clear",
+                    "HasPrecipitation": false
+                },
+                "Sources": [
+                    "AccuWeather"
+                ],
+                "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=2&lang=en-us",
+                "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=2&lang=en-us"
+            },
+            {
+                "Date": "2023-08-06T07:00:00+03:00",
+                "EpochDate": 1691294400,
+                "Temperature": {
+                    "Minimum": {
+                        "Value": 78,
+                        "Unit": "F",
+                        "UnitType": 18
+                    },
+                    "Maximum": {
+                        "Value": 92,
+                        "Unit": "F",
+                        "UnitType": 18
+                    }
+                },
+                "Day": {
+                    "Icon": 1,
+                    "IconPhrase": "Sunny",
+                    "HasPrecipitation": false
+                },
+                "Night": {
+                    "Icon": 34,
+                    "IconPhrase": "Mostly clear",
+                    "HasPrecipitation": false
+                },
+                "Sources": [
+                    "AccuWeather"
+                ],
+                "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=3&lang=en-us",
+                "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=3&lang=en-us"
+            },
+            {
+                "Date": "2023-08-07T07:00:00+03:00",
+                "EpochDate": 1691380800,
+                "Temperature": {
+                    "Minimum": {
+                        "Value": 80,
+                        "Unit": "F",
+                        "UnitType": 18
+                    },
+                    "Maximum": {
+                        "Value": 90,
+                        "Unit": "F",
+                        "UnitType": 18
+                    }
+                },
+                "Day": {
+                    "Icon": 1,
+                    "IconPhrase": "Sunny",
+                    "HasPrecipitation": false
+                },
+                "Night": {
+                    "Icon": 35,
+                    "IconPhrase": "Partly cloudy",
+                    "HasPrecipitation": false
+                },
+                "Sources": [
+                    "AccuWeather"
+                ],
+                "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=4&lang=en-us",
+                "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=4&lang=en-us"
+            },
+            {
+                "Date": "2023-08-08T07:00:00+03:00",
+                "EpochDate": 1691467200,
+                "Temperature": {
+                    "Minimum": {
+                        "Value": 79,
+                        "Unit": "F",
+                        "UnitType": 18
+                    },
+                    "Maximum": {
+                        "Value": 90,
+                        "Unit": "F",
+                        "UnitType": 18
+                    }
+                },
+                "Day": {
+                    "Icon": 1,
+                    "IconPhrase": "Sunny",
+                    "HasPrecipitation": false
+                },
+                "Night": {
+                    "Icon": 34,
+                    "IconPhrase": "Mostly clear",
+                    "HasPrecipitation": false
+                },
+                "Sources": [
+                    "AccuWeather"
+                ],
+                "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=5&lang=en-us",
+                "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/daily-weather-forecast/215854?day=5&lang=en-us"
+            }
+        ]
+    }
+
+    const { [id]: history } = localStorageService.read('forecasts') || { [id]: null }
+    const fiveHourInMillisecond = 1000 * 60 * 60 * 5
+    if ((history?.effectiveDate.getTime() || Infinity) < Date.now() + fiveHourInMillisecond) return history
+
+    try {
+        // const url = `${AWEATHER_BASE_URL}forecasts/v1/daily/5day/${id}`
+        // const response = await httpService.get(url, { apikey })
+
+        const responseToSave = _formatLocationForecast(response)
+
+        localStorageService.addToMap('forecastsById', id, responseToSave)
+
+        return responseToSave
+    } catch (err) {
+        throw err
+    }
+}
 
 
 export const aweatherService = {
     getAutocompleteOptions,
-    getLocationByLatLon
+    getLocationByLatLon,
+    getLocationForecast
 }
+
+
+
+const _formatLocationByLatLonResponse = (response: LocationByLatLonResponse) => ({
+    id: response.Key,
+    name: response.LocalizedName,
+    country: {
+        code: response.Country.ID.toLocaleLowerCase(),
+        name: response.Country.LocalizedName
+    }
+})
+
+
+const _formatLocationForecast = (response: LocationForecastResponse) => ({
+    effectiveDate: new Date(response.Headline.EffectiveDate),
+    forecasts: response.DailyForecasts.map((forecast) => ({
+        dayName: convertDateToDayName(new Date(forecast.Date)),
+        day: {
+            icon: String(forecast.Day.Icon).padStart(2, '0'),
+            text: forecast.Day.IconPhrase
+        },
+        night: {
+            icon: String(forecast.Night.Icon).padStart(2, '0'),
+            text: forecast.Night.IconPhrase
+        },
+        temperature: {
+            minimum: {
+                fahrenheit: forecast.Temperature.Minimum.Value,
+                celsius: +ConvertTemperatureUnit(forecast.Temperature.Minimum.Value).toFixed(0)
+            },
+            maximum: {
+                fahrenheit: forecast.Temperature.Maximum.Value,
+                celsius: +ConvertTemperatureUnit(forecast.Temperature.Maximum.Value).toFixed(0)
+            },
+        }
+    }))
+})

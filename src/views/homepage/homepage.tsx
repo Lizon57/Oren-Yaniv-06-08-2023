@@ -11,7 +11,7 @@ import './style.scss'
 
 export default function Homepage() {
     const selectedCity: SelectedCity = useSelector((state: RootState) => state.weatherModule.selectedCity)
-    console.log(selectedCity)
+
 
     return (
         <main className="views--homepage__container">

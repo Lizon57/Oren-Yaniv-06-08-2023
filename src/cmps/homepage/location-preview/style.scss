@@ -21,7 +21,7 @@
 
                     width: 100%;
                     height: 100%;
-                    object-fit: contain;
+                    object-fit: cover;
                 }
             }
 
@@ -61,10 +61,5 @@
             display: flex;
             flex-direction: column;
         }
-    }
-
-    .forecasts {
-        font-family: getTypography("emphasis");
-        text-align: center;
     }
 }
