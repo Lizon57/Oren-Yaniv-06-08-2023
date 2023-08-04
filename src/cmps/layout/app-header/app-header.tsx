@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import logo from '@/assets/images/logo.png'
 import './style.scss'
+import { CelsiusFahrenheitToggler } from './celsius-fahrenheit-toggler/celsius-fahrenheit-toggler'
 
 
 export function AppHeader() {
@@ -11,6 +12,8 @@ export function AppHeader() {
                     <img src={logo} />
                     <span className="name">weather</span>
                 </span>
+
+                <CelsiusFahrenheitToggler />
 
                 <nav>
                     <NavLink to="/">Home</NavLink>

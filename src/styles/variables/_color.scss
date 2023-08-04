@@ -10,6 +10,7 @@ $color: (
     "text-secondary": #9ea1a4,
     "red-primary": #ff3040,
     "error-primary": #ff3040,
+    "success-primary": #3ba441,
 );
 
 @function getColor($name) {

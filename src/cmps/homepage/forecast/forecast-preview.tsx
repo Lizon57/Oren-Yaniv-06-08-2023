@@ -1,8 +1,22 @@
-import { Icon } from "@/cmps/common/icon/icon"
+import { RootState } from "@/store/store"
+import { useSelector } from "react-redux"
+
+import { ConvertTemperatureUnit } from "@/services/util/convert-temperatur-unit"
 import { Forecast } from "@/models/forecast"
+
+import { Icon } from "@/cmps/common/icon/icon"
 
 
 export function ForecastPreview({ forecast, shouldRenderIcon }: Props) {
+    const isCelsiusPreffer = useSelector((state: RootState) => state.appModule.isCelsiusPreffer)
+
+    const minimumTempCelsius = forecast.temperature.minimum.celsius
+    const minimumTempDisplay = isCelsiusPreffer ? minimumTempCelsius : ConvertTemperatureUnit(minimumTempCelsius, false)
+
+    const maximumTempCelsius = forecast.temperature.maximum.celsius
+    const maximumTempDisplay = isCelsiusPreffer ? maximumTempCelsius : ConvertTemperatureUnit(maximumTempCelsius, false)
+
+
     return (
         <>
             <article className="homepage--forecast-preview__container">
@@ -21,11 +35,15 @@ export function ForecastPreview({ forecast, shouldRenderIcon }: Props) {
                 </div>
 
                 <div className="minmax-temperature">
-                    <span className="minimum">{forecast.temperature.minimum.celsius}</span>
+                    <span className="minimum">{minimumTempDisplay}</span>
                     <span className="seperator">-</span>
-                    <span className="maximum">{forecast.temperature.maximum.celsius}</span>
+                    <span className="maximum">{maximumTempDisplay}</span>
                     <span className="seperator"></span>
-                    <Icon name="celsius-sign" size="20" />
+
+                    {isCelsiusPreffer
+                        ? <Icon name="celsius-sign" size="20" />
+                        : <Icon name="fahrenheit-sign" size="20" />
+                    }
                 </div>
             </article>
         </>

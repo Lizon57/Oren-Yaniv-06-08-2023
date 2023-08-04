@@ -1,11 +1,13 @@
 import { legacy_createStore as createStore, combineReducers } from 'redux'
 import { weatherReducer } from './reducers/weather.reducer'
+import { appReducer } from './reducers/app.reducer'
 // import { legacy_createStore as createStore, compose, combineReducers } from 'redux'
 
 
 
 const rootReducer = combineReducers({
-    weatherModule: weatherReducer
+    appModule: appReducer,
+    weatherModule: weatherReducer,
 })
 
 
