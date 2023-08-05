@@ -22,7 +22,7 @@ export function ErrorPopup() {
 
     if (!error) return <></>
     return (
-        <aside className="layout--error-popup__container">
+        <aside className="layout--error-popup__container" title="An error occured">
             <Icon name="sad-smiley" size="20px" />
             <span className="text">{error}</span>
         </aside>

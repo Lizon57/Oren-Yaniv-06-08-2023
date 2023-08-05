@@ -19,7 +19,7 @@ export function FavoritesList({ locations }: Props) {
         <section className="favorites--favorites-list__container">
             {locations?.map(location => <div key={location.id} className="preview-wrapper">
                 <span className="icon-wrapper" onClick={() => onRemoveFromFavorites(location)}>
-                    <Icon name="remove-full" size="25px" />
+                    <Icon name="remove-full" size="25px" title="Remove from favorites" />
                 </span>
 
                 <LocationCurrWeatherPreview location={location} />

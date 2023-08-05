@@ -42,6 +42,7 @@ export function AppHeader() {
                     <Icon
                         name={isMenuOpen ? 'times' : 'bars'}
                         size={isMenuOpen ? '25px' : '40px'}
+                        title="Menu"
                     />
                 </span>
                 }

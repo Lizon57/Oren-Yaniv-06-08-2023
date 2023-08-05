@@ -33,7 +33,7 @@ export function FavoriteIndicator() {
                 name={isFavorite ? 'heart-full' : 'heart-outline'}
                 classList={classNames({ favorite: isFavorite })}
                 size="32"
-                title={isFavorite ? 'Favorite' : 'Unfavorite'}
+                title={`${isFavorite ? 'Favorite' : 'Unfavorite'} location`}
             />
         </button>
     )

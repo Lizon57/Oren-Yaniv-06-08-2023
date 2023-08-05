@@ -25,7 +25,10 @@ export function Temperature({ value, shouldRenderIndicatorIcon = false, isCelsiu
 
 
     return (
-        <span className="common--temperature__container">
+        <span
+            className="common--temperature__container"
+            title={`${temp} (${isCelsiusPreffer ? 'Celsius' : 'Fahrenheit'})`}
+        >
             {temp}
             {shouldRenderIndicatorIcon && <>
                 {isCelsiusPreffer

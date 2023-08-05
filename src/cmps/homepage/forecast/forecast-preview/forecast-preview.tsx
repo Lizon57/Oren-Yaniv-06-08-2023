@@ -11,7 +11,10 @@ export function ForecastPreview({ forecast, shouldRenderIcon }: Props) {
             <article className="homepage--forecast-preview__container">
                 <span className="day-name">{forecast.dayName}</span>
 
-                <img src={`https://developer.accuweather.com/sites/default/files/${forecast.day.icon}-s.png`} />
+                <img
+                    src={`https://developer.accuweather.com/sites/default/files/${forecast.day.icon}-s.png`}
+                    title={forecast.day.text}
+                />
 
                 <div className="textual">
                     <div className="day">

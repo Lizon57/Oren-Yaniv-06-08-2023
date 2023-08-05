@@ -13,10 +13,11 @@ export function CelsiusFahrenheitToggler() {
 
 
     return <IconsToggler
+        title={`Change app temperature unit to ${isCelsiusPreffer ? 'Fahrenheit' : 'Celsius'}`}
         option1Name="celsius-sign"
         option2Name="fahrenheit-sign"
         indicatorName="temperature"
-        isFirstOptionActive={isCelsiusPreffer}
+        isFirstOptionActive={!isCelsiusPreffer}
         callback={toggleIsCelsiusPreffer}
     />
 }
