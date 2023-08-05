@@ -8,7 +8,7 @@ const save = <T>(storageKey: string, value: T) => {
     localStorage.setItem(storageKey, JSON.stringify(value))
 }
 
-const addToMap = <T>(storageKey: string, mapKey: string, value: T) => {
+const saveToMap = <T>(storageKey: string, mapKey: string, value: T) => {
     const map = read(storageKey) || {}
     map[mapKey] = value
     save(storageKey, map)
@@ -18,5 +18,5 @@ const addToMap = <T>(storageKey: string, mapKey: string, value: T) => {
 export const localStorageService = {
     read,
     save,
-    addToMap
+    saveToMap
 }

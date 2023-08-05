@@ -1,12 +1,20 @@
 import uuid from "react-uuid"
 
-import { LocationForecast } from '@/models/location-forecast'
+import { useSelector } from "react-redux"
+import { RootState } from "@/store/store"
+
+import { LocationForecast } from '@/models/forecast/location-forecast'
 
 import { ForecastPreview } from './forecast-preview'
 import './style.scss'
 
 
-export function ForecastList({ forecast }: Props) {
+export function ForecastList() {
+    const forecast: LocationForecast = useSelector((state: RootState) => state.weatherModule.fiveDayForecast)
+
+
+    if (!forecast) return <></>
+
     return (
         <section className="homepage--forecast-list__container">
             <h2>5 days forecast</h2>
@@ -20,9 +28,4 @@ export function ForecastList({ forecast }: Props) {
             </div>
         </section>
     )
-}
-
-
-type Props = {
-    forecast: LocationForecast
 }

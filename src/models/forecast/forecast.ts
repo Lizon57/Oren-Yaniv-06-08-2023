@@ -9,13 +9,7 @@ export type Forecast = {
         text: string
     }
     temperature: {
-        minimum: {
-            fahrenheit: number
-            celsius: number
-        }
-        maximum: {
-            fahrenheit: number
-            celsius: number
-        }
+        minimum: number
+        maximum: number
     }
 }

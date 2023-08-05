@@ -3,12 +3,13 @@ const apikey: string = import.meta.env.VITE_APP_AWEATHER_API_KEY as string
 import { httpService } from './http.service'
 import { localStorageService } from './localstorage.service'
 
-import { LocationByLatLonResponse } from '@/models/location-by-lat-lon-response'
-import { LocationForecastResponse } from '@/models/location-forecast-response'
+import { LocationByLatLonResponse } from '@/models/aweather-resopnses/location-by-lat-lon-response'
+import { LocationForecastResponse } from '@/models/aweather-resopnses/location-forecast-response'
+import { CurrWeatherResponse } from '@/models/aweather-resopnses/curr-weather-response'
 
 import { AWEATHER_BASE_URL } from '@/constants/aweather-base-url'
 
-import { ConvertTemperatureUnit } from './util/convert-temperatur-unit'
+import { convertTemperatureUnit } from './util/convert-temperatur-unit'
 import { convertDateToDayName } from './util/convert-date-to-day-name'
 
 
@@ -136,7 +137,7 @@ const getLocationByLatLon = async (lat: string, lon: string) => {
 
         const responseToSave = _formatLocationByLatLonResponse(response)
 
-        localStorageService.addToMap('locationByLatLon', latLon, responseToSave)
+        localStorageService.saveToMap('locationByLatLon', latLon, responseToSave)
         return responseToSave
     } catch (err) {
         throw err
@@ -145,6 +146,7 @@ const getLocationByLatLon = async (lat: string, lon: string) => {
 
 
 const getLocationForecast = async (id: string) => {
+    // For debug: have 6 days forecast response for Tel-Aviv according to 04/08/2023
     const response: LocationForecastResponse = {
         "Headline": {
             "EffectiveDate": "2023-08-04T20:00:00+03:00",
@@ -318,7 +320,7 @@ const getLocationForecast = async (id: string) => {
 
     const { [id]: history } = localStorageService.read('forecasts') || { [id]: null }
     const fiveHourInMillisecond = 1000 * 60 * 60 * 5
-    if ((history?.effectiveDate.getTime() || Infinity) < Date.now() + fiveHourInMillisecond) return history
+    if ((new Date(history?.effectiveDate).getTime() || Infinity) < Date.now() + fiveHourInMillisecond) return history
 
     try {
         // const url = `${AWEATHER_BASE_URL}forecasts/v1/daily/5day/${id}`
@@ -326,8 +328,52 @@ const getLocationForecast = async (id: string) => {
 
         const responseToSave = _formatLocationForecast(response)
 
-        localStorageService.addToMap('forecastsById', id, responseToSave)
+        localStorageService.saveToMap('forecastsById', id, responseToSave)
+        return responseToSave
+    } catch (err) {
+        throw err
+    }
+}
 
+
+const getLocationCurrWeather = async (id: string) => {
+    const response: CurrWeatherResponse = [
+        {
+            "LocalObservationDateTime": "2023-08-05T15:42:00+03:00",
+            "EpochTime": 1691239320,
+            "WeatherText": "Sunny",
+            "WeatherIcon": 1,
+            "HasPrecipitation": false,
+            "PrecipitationType": null,
+            "IsDayTime": true,
+            "Temperature": {
+                "Metric": {
+                    "Value": 30.7,
+                    "Unit": "C",
+                    "UnitType": 17
+                },
+                "Imperial": {
+                    "Value": 87,
+                    "Unit": "F",
+                    "UnitType": 18
+                }
+            },
+            "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/current-weather/215854?lang=en-us",
+            "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/current-weather/215854?lang=en-us"
+        }
+    ]
+
+    const { [id]: history } = localStorageService.read('currWeather') || { [id]: null }
+    const oneHourInMillisecond = 1000 * 60 * 60
+    if ((new Date(history?.effectiveDate).getTime() || Infinity) < Date.now() + oneHourInMillisecond) return history
+
+    try {
+        // const url = `${AWEATHER_BASE_URL}currentconditions/v1//${id}`
+        // const response = await httpService.get(url, { apikey })
+
+        const responseToSave = _formatLocationCurrWeather(response)
+
+        localStorageService.saveToMap('currWeather', id, responseToSave)
         return responseToSave
     } catch (err) {
         throw err
@@ -338,7 +384,8 @@ const getLocationForecast = async (id: string) => {
 export const aweatherService = {
     getAutocompleteOptions,
     getLocationByLatLon,
-    getLocationForecast
+    getLocationForecast,
+    getLocationCurrWeather
 }
 
 
@@ -354,7 +401,7 @@ const _formatLocationByLatLonResponse = (response: LocationByLatLonResponse) => 
 
 
 const _formatLocationForecast = (response: LocationForecastResponse) => ({
-    effectiveDate: new Date(response.Headline.EffectiveDate),
+    effectiveDate: new Date(response.Headline.EffectiveDate).getTime(),
     forecasts: response.DailyForecasts.map((forecast) => ({
         dayName: convertDateToDayName(new Date(forecast.Date)),
         day: {
@@ -366,14 +413,24 @@ const _formatLocationForecast = (response: LocationForecastResponse) => ({
             text: forecast.Night.IconPhrase
         },
         temperature: {
-            minimum: {
-                fahrenheit: forecast.Temperature.Minimum.Value,
-                celsius: +ConvertTemperatureUnit(forecast.Temperature.Minimum.Value).toFixed(0)
-            },
-            maximum: {
-                fahrenheit: forecast.Temperature.Maximum.Value,
-                celsius: +ConvertTemperatureUnit(forecast.Temperature.Maximum.Value).toFixed(0)
-            },
+            minimum: +convertTemperatureUnit(forecast.Temperature.Minimum.Value).toFixed(0),
+            maximum: +convertTemperatureUnit(forecast.Temperature.Maximum.Value).toFixed(0),
         }
     }))
 })
+
+
+const _formatLocationCurrWeather = (response: CurrWeatherResponse) => {
+    const unwindResponse = response[0]
+
+    const formattedResponse = {
+        effectiveDate: new Date(unwindResponse.LocalObservationDateTime).getTime(),
+        weather: {
+            icon: String(unwindResponse.WeatherIcon).padStart(2, '0'),
+            text: unwindResponse.WeatherText,
+            celsiusTemp: +convertTemperatureUnit(unwindResponse.Temperature.Imperial.Value).toFixed(0)
+        },
+    }
+
+    return formattedResponse
+}

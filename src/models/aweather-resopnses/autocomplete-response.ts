@@ -1,4 +1,4 @@
-export type AweatherAutocompleteResponse = {
+export type AutocompleteResponse = {
     Key: string
     LocalizedName: string
     Country: {

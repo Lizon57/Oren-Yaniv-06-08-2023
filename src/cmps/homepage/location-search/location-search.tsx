@@ -5,7 +5,7 @@ import { GroupBase, OptionsOrGroups, SingleValue, StylesConfig } from 'react-sel
 
 import { aweatherService } from "@/services/aweather.service"
 import { stripStringToEnglishLetter } from "@/services/util/strip-string-to-english-letter"
-import { AweatherAutocompleteResponse } from "@/models/aweather-autocomplete-response"
+import { AutocompleteResponse } from "@/models/aweather-resopnses/autocomplete-response"
 
 import { setSelectedCity } from "@/store/actions/weather.action"
 
@@ -27,7 +27,7 @@ export function LocationSearch() {
         if (!pharse) return []
 
         try {
-            const response = await aweatherService.getAutocompleteOptions(pharse) as AweatherAutocompleteResponse
+            const response = await aweatherService.getAutocompleteOptions(pharse) as AutocompleteResponse
             const options = response.map(option => ({
                 label: option.LocalizedName,
                 value: option.Key,

@@ -1,0 +1,50 @@
+@import "/src/styles/variables/import";
+
+
+.homepage--curr-weather__container {
+    display: flex;
+    gap: 1rem;
+
+    width: 100%;
+
+    img {
+        display: block;
+
+        max-width: 5rem;
+        object-fit: cover;
+    }
+
+    .location {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: .3rem;
+
+        flex-grow: 1;
+
+        .name {
+            display: flex;
+            align-items: baseline;
+
+            .city {
+                font-size: 1.3rem;
+                font-family: getTypography("emphasis");
+            }
+
+            .country {
+                color: getColor("text-secondary");
+                font-size: .8rem;
+                margin-inline-start: 1ch;
+
+                img {
+                    display: inline-block;
+                    margin-inline-start: 5px;
+                }
+            }
+        }
+
+        .describe {
+            font-size: .9rem;
+        }
+    }
+}

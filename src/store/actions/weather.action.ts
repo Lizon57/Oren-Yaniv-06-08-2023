@@ -2,6 +2,7 @@ import isEqual from 'lodash/isEqual'
 import { store } from "../store"
 import { aweatherService } from "@/services/aweather.service"
 import { SelectedCity } from "@/models/selected-city"
+import { CurrWeather } from '@/models/curr-weather'
 import { INITIAL_SELECTED_CITY } from "@/constants/initial-selected-city"
 
 
@@ -13,6 +14,28 @@ export const setSelectedCity = (city?: SelectedCity) => {
     if (isEqualCurrSelected) return
 
     store.dispatch({ type: 'setSelectedCity', city })
+}
+
+
+export const setCurrWeather = (newWeather?: CurrWeather) => {
+    if (!newWeather) return
+
+    const currWeather = store.getState().weatherModule.currWeather
+    const isEqualCurrWeather = isEqual(currWeather, newWeather)
+    if (isEqualCurrWeather) return
+
+    store.dispatch({ type: 'setCurrWeather', currWeather: newWeather })
+}
+
+
+export const setFiveDayForecast = (newForecast?: CurrWeather) => {
+    if (!newForecast) return
+
+    const currForecast = store.getState().weatherModule.fiveDayForecast
+    const isEqualForecast = isEqual(currForecast, newForecast)
+    if (isEqualForecast) return
+
+    store.dispatch({ type: 'setFiveDayForecast', fiveDayForecast: newForecast })
 }
 
 
