@@ -1,11 +1,8 @@
 import { useEffect, useState } from 'react'
-
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
-
 import { convertTempUnit } from '@/services/util/convert-temperatur-unit'
-
-import { Icon } from '../icon/icon'
+import { Icon } from "@/cmps/common/icon/icon"
 import './style.scss'
 
 

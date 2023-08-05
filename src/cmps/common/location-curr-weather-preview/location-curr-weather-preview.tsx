@@ -1,5 +1,4 @@
 import { LocationWithCurrWeather } from "@/models/location/location-with-curr-weather"
-
 import { Temperature } from '@/cmps/common/temperature/temperature'
 import './style.scss'
 

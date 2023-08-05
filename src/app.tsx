@@ -1,17 +1,12 @@
 import { Suspense } from "react"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import 'normalize.css'
-
 import { useOnFirstRender } from "./hooks/use-on-first-render"
-
 import { routes } from "./routes/routes"
-
 import { setInitialSelectedLocation } from "@/store/actions/weather.action"
-
 import { Loader } from "./cmps/common/loader/loader"
 import { AppHeader } from "./cmps/layout/app-header/app-header"
 import { ErrorPopup } from "./cmps/layout/error-popup/error-popup"
-
 import './styles/_main.scss'
 import './_app.scss'
 

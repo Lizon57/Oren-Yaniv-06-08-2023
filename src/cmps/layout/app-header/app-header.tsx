@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
+import classNames from 'classnames'
 import { NavLink } from 'react-router-dom'
-import { CelsiusFahrenheitToggler } from '../../common/celsius-fahrenheit-toggler/celsius-fahrenheit-toggler'
+import { useOnWindowResize } from '@/hooks/use-on-window-resize'
+import { useOnClickOutside } from '@/hooks/use-on-click-outside'
+import { CelsiusFahrenheitToggler } from '@/cmps/common/celsius-fahrenheit-toggler/celsius-fahrenheit-toggler'
 import { Icon } from '@/cmps/common/icon/icon'
 import logo from '@/assets/images/logo.png'
 import './style.scss'
-import { useOnWindowResize } from '@/hooks/use-on-window-resize'
-import classNames from 'classnames'
-import { useOnClickOutside } from '@/hooks/use-on-click-outside'
 
 
 export function AppHeader() {

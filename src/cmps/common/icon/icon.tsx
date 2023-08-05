@@ -8,7 +8,6 @@ export function Icon({ name, title, size, classList, onClick }: Props) {
     if (!icon) return <></>
 
     const spanProps = { title, onClick }
-
     return (
         <span className={classNames('common--icon__container', classList)}  {...spanProps}>
             <svg

@@ -1,18 +1,15 @@
 import { useEffect, useState } from 'react'
-
 import { favoriteService } from '@/services/favorite.service'
 import { aweatherService } from '@/services/aweather.service'
 import { getErrorMessage } from '@/services/util/get-error-message'
-
+import { eventBus } from '@/services/event.bus.service'
 import { Location } from '@/models/location/location'
 import { LocationWithCurrWeather } from '@/models/location/location-with-curr-weather'
-
 import { Loader } from '@/cmps/common/loader/loader'
 import { ErrorMessage } from '@/cmps/common/error-message/error-message'
 import { Icon } from '@/cmps/common/icon/icon'
 import { FavoritesList } from '@/cmps/favorites/favorites-list/favorites-list'
 import './style.scss'
-import { eventBus } from '@/services/event.bus.service'
 
 
 export default function Favorites() {

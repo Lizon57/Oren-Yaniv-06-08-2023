@@ -1,16 +1,12 @@
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-
 import { RootState } from '@/store/store'
 import { setCurrWeather, setFiveDayForecast } from '@/store/actions/weather.action'
-
 import { aweatherService } from '@/services/aweather.service'
 import { getErrorMessage } from '@/services/util/get-error-message'
-
 import { Location } from '@/models/location/location'
 import { CurrWeather } from '@/models/curr-weather'
 import { LocationWithCurrWeather } from '@/models/location/location-with-curr-weather'
-
 import { FavoriteIndicator } from './favorite-indicator/favorite-indicator'
 import { ForecastList } from '@/cmps/homepage/forecast/forecast-list/forcast-list'
 import { CelsiusFahrenheitToggler } from '@/cmps/common/celsius-fahrenheit-toggler/celsius-fahrenheit-toggler'

@@ -1,9 +1,7 @@
 import { Line } from "react-chartjs-2"
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Tooltip } from 'chart.js'
-
 import { useSelector } from "react-redux"
 import { RootState } from "@/store/store"
-
 import { LocationForecast } from "@/models/forecast/location-forecast"
 import { convertTempUnit } from "@/services/util/convert-temperatur-unit"
 import './style.scss'

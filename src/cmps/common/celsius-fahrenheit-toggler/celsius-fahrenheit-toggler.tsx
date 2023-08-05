@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
 import { setIsCelsiusPreffer } from '@/store/actions/app.action'
-
 import { IconsToggler } from '@/cmps/layout/icons-toggler/icons-toggler'
 import './style.scss'
 

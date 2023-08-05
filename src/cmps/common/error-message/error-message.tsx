@@ -1,4 +1,4 @@
-import { Icon } from "../icon/icon"
+import { Icon } from "@/cmps/common/icon/icon"
 import './style.scss'
 
 

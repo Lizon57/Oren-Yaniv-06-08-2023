@@ -1,21 +1,17 @@
+import classNames from "classnames"
 import { useDebouncedCallback } from "use-debounce"
 import AsyncSelect from 'react-select/async'
 import { useState } from "react"
 import { GroupBase, OptionsOrGroups, SingleValue, StylesConfig } from 'react-select'
-
+import { setSelectedLocation } from "@/store/actions/weather.action"
 import { aweatherService } from "@/services/aweather.service"
 import { stripStringToEnglishLetter } from "@/services/util/strip-string-to-english-letter"
 import { AutocompleteResponse } from "@/models/aweather-resopnses/autocomplete-response"
-
-import { setSelectedLocation } from "@/store/actions/weather.action"
-
 import { LocationSearchOption } from "@/models/location/location-search-option"
 import { Location } from "@/models/location/location"
-
 import { Icon } from "@/cmps/common/icon/icon"
 import { LocationSearchPreview } from "./location-search-preview"
 import './styles.scss'
-import classNames from "classnames"
 
 
 export function LocationSearch() {

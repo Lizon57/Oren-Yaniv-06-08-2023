@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react'
 import classNames from 'classnames'
-
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
-
+import { favoriteService } from '@/services/favorite.service'
 import { Location } from '@/models/location/location'
-
 import { Icon } from '@/cmps/common/icon/icon'
 import './style.scss'
-import { favoriteService } from '@/services/favorite.service'
 
 
 export function FavoriteIndicator() {

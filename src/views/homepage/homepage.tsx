@@ -1,8 +1,6 @@
 import { useSelector } from "react-redux"
 import { RootState } from "@/store/store"
-
 import { Location } from "@/models/location/location"
-
 import { LocationSearch } from "@/cmps/homepage/location-search/location-search"
 import { Loader } from "@/cmps/common/loader/loader"
 import { LocationPreview } from "@/cmps/homepage/location-preview/location-preview"
