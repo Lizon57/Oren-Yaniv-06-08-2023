@@ -1,1 +1,1 @@
-export const AWEATHER_BASE_URL = 'http://dataservice.accuweather.com/'
+export const AWEATHER_BASE_URL = 'https://dataservice.accuweather.com/'
