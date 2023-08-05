@@ -13,6 +13,7 @@ import { FavoriteIndicator } from './favorite-indicator/favorite-indicator'
 import { ForecastList } from '@/cmps/homepage/forecast/forcast-list'
 import { CurrWeatherPreview } from './curr-weather-preview/curr-weather-preview'
 import './style.scss'
+import { CelsiusFahrenheitToggler } from '@/cmps/layout/app-header/celsius-fahrenheit-toggler/celsius-fahrenheit-toggler'
 
 
 export function LocationPreview() {
@@ -44,6 +45,7 @@ export function LocationPreview() {
 
                 <div className="options">
                     <FavoriteIndicator initialState={false} />
+                    <CelsiusFahrenheitToggler />
                 </div>
             </section>
 

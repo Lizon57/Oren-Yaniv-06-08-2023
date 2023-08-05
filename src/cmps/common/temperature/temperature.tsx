@@ -17,8 +17,8 @@ export function Temperature({ value, shouldRenderIndicatorIcon = false, isCelsiu
     useEffect(() => {
         let newTemperature: number
 
-        if (isCelsiusPreffer) newTemperature = isCelsiusValue ? value : convertTemperatureUnit(value, false)
-        else newTemperature = isCelsiusValue ? convertTemperatureUnit(value,false) : value
+        if (isCelsiusPreffer) newTemperature = isCelsiusValue ? value : convertTemperatureUnit(value)
+        else newTemperature = isCelsiusValue ? convertTemperatureUnit(value) : value
 
         setTemperature(newTemperature)
     }, [value, isCelsiusPreffer])

@@ -6,6 +6,7 @@ import { RootState } from "@/store/store"
 import { LocationForecast } from '@/models/forecast/location-forecast'
 
 import { ForecastPreview } from './forecast-preview'
+import { ForecastChart } from "./forecast-chart"
 import './style.scss'
 
 
@@ -26,6 +27,7 @@ export function ForecastList() {
                     shouldRenderIcon={idx ? false : true}
                 />)}
             </div>
+            <ForecastChart />
         </section>
     )
 }

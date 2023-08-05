@@ -413,8 +413,8 @@ const _formatLocationForecast = (response: LocationForecastResponse) => ({
             text: forecast.Night.IconPhrase
         },
         temperature: {
-            minimum: +convertTemperatureUnit(forecast.Temperature.Minimum.Value).toFixed(0),
-            maximum: +convertTemperatureUnit(forecast.Temperature.Maximum.Value).toFixed(0),
+            minimum: +convertTemperatureUnit(forecast.Temperature.Minimum.Value, true).toFixed(0),
+            maximum: +convertTemperatureUnit(forecast.Temperature.Maximum.Value, true).toFixed(0),
         }
     }))
 })
@@ -428,7 +428,7 @@ const _formatLocationCurrWeather = (response: CurrWeatherResponse) => {
         weather: {
             icon: String(unwindResponse.WeatherIcon).padStart(2, '0'),
             text: unwindResponse.WeatherText,
-            celsiusTemp: +convertTemperatureUnit(unwindResponse.Temperature.Imperial.Value).toFixed(0)
+            celsiusTemp: +convertTemperatureUnit(unwindResponse.Temperature.Imperial.Value, true).toFixed(0)
         },
     }
 

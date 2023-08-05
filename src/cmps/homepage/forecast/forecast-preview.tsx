@@ -1,7 +1,3 @@
-import { RootState } from "@/store/store"
-import { useSelector } from "react-redux"
-
-import { convertTemperatureUnit } from "@/services/util/convert-temperatur-unit"
 import { Forecast } from "@/models/forecast/forecast"
 
 import { Icon } from "@/cmps/common/icon/icon"
