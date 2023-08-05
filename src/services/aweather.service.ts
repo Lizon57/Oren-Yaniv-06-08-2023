@@ -48,8 +48,8 @@ const getAutocompleteOptions = async (pharse: string) => {
         }
     ]
 
-    const { [pharse]: history } = localStorageService.read('autocomplete') || { [pharse]: null }
-    if (history) return history
+    // const { [pharse]: history } = localStorageService.read('autocomplete') || { [pharse]: null }
+    // if (history) return history
 
     try {
         // const url = `${AWEATHER_BASE_URL}locations/v1/cities/autocomplete?q=${pharse}`
@@ -137,10 +137,10 @@ const getLocationByLatLon = async (lat: string, lon: string) => {
 
         const responseToSave = _formatLocationByLatLonResponse(response)
 
-        localStorageService.saveToMap('locationByLatLon', latLon, responseToSave)
+        // localStorageService.saveToMap('locationByLatLon', latLon, responseToSave)
         return responseToSave
     } catch (err) {
-        throw err
+        throw new Error('An error occured while trying to find you\'re location. Please try again')
     }
 }
 
@@ -318,9 +318,9 @@ const getLocationForecast = async (id: string) => {
         ]
     }
 
-    const { [id]: history } = localStorageService.read('forecasts') || { [id]: null }
-    const fiveHourInMillisecond = 1000 * 60 * 60 * 5
-    if ((new Date(history?.effectiveDate).getTime() || Infinity) < Date.now() + fiveHourInMillisecond) return history
+    // const { [id]: history } = localStorageService.read('forecasts') || { [id]: null }
+    // const fiveHourInMillisecond = 1000 * 60 * 60 * 5
+    // if ((new Date(history?.effectiveDate).getTime() || Infinity) < Date.now() + fiveHourInMillisecond) return history
 
     try {
         // const url = `${AWEATHER_BASE_URL}forecasts/v1/daily/5day/${id}`
@@ -329,9 +329,10 @@ const getLocationForecast = async (id: string) => {
         const responseToSave = _formatLocationForecast(response)
 
         localStorageService.saveToMap('forecastsById', id, responseToSave)
+
         return responseToSave
     } catch (err) {
-        throw err
+        throw new Error('An error occured while trying to get forecast for you. Please try again.')
     }
 }
 
@@ -376,7 +377,7 @@ const getLocationCurrWeather = async (id: string) => {
         localStorageService.saveToMap('currWeather', id, responseToSave)
         return responseToSave
     } catch (err) {
-        throw err
+        throw new Error('An error occured while trying to get forecast for you. Please try again.')
     }
 }
 

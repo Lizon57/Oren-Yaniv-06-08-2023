@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { RootState } from '@/store/store'
 import { setCurrWeather, setFiveDayForecast } from '@/store/actions/weather.action'
 
 import { aweatherService } from '@/services/aweather.service'
+import { getErrorMessage } from '@/services/util/get-error-message'
 
 import { Location } from '@/models/location/location'
 import { CurrWeather } from '@/models/curr-weather'
@@ -14,12 +15,17 @@ import { FavoriteIndicator } from './favorite-indicator/favorite-indicator'
 import { ForecastList } from '@/cmps/homepage/forecast/forecast-list/forcast-list'
 import { CelsiusFahrenheitToggler } from '@/cmps/common/celsius-fahrenheit-toggler/celsius-fahrenheit-toggler'
 import { LocationCurrWeatherPreview } from '@/cmps/common/location-curr-weather-preview/location-curr-weather-preview'
+import { Loader } from '@/cmps/common/loader/loader'
+import { ErrorMessage } from '@/cmps/common/error-message/error-message'
 import './style.scss'
 
 
 export function LocationPreview() {
     const selectedCity: Location = useSelector((state: RootState) => state.weatherModule.selectedCity)
     const currWeather: CurrWeather = useSelector((state: RootState) => state.weatherModule.currWeather)
+
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState<string>()
 
 
     const fetchData = async (id: string) => {
@@ -28,7 +34,11 @@ export function LocationPreview() {
             const currWeather = await aweatherService.getLocationCurrWeather(id)
             setFiveDayForecast(forecast)
             setCurrWeather(currWeather)
-        } catch (err) {
+        } catch (error) {
+            const errorMessage = getErrorMessage(error)
+            setError(errorMessage)
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -37,7 +47,8 @@ export function LocationPreview() {
     }, [selectedCity])
 
 
-    if (!currWeather) return <></>
+    if (isLoading) return <Loader />
+    if (error) return <ErrorMessage message={error} />
 
     const locationWithWeather: LocationWithCurrWeather = { ...selectedCity, ...currWeather }
 

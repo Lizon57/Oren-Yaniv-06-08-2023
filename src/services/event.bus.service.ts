@@ -26,3 +26,7 @@ type Listener = (data: unknown) => void
 export const reloadFavoritesList = () => {
     eventBus.emit('reloadFavoritesList')
 }
+
+export const popErrorMessage = (data: unknown) => {
+    eventBus.emit('popErrorMessage', data)
+}

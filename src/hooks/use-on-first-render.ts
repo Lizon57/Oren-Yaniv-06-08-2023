@@ -6,5 +6,6 @@ export const useOnFirstRender = (callback: () => void) => {
     if (!isFirstRender.current) return
 
     isFirstRender.current = false
+
     callback()
 }

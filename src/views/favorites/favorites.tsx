@@ -37,8 +37,8 @@ export default function Favorites() {
             }))
 
             setFavoritesWithCurrWeather(mergedFavorites)
-        } catch (err) {
-            const errorMessage = getErrorMessage(err)
+        } catch (error) {
+            const errorMessage = getErrorMessage(error)
             setError(errorMessage)
         } finally {
             setIsLoading(false)

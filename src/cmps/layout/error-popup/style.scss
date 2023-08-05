@@ -1,0 +1,25 @@
+@import '/src/styles/variables/import';
+@import '/src/styles/mixins/import';
+
+
+.layout--error-popup__container {
+    position: fixed;
+    left: .5rem;
+    top: 4.5rem;
+    z-index: 40;
+
+    border-radius: 5px;
+    background-color: getColor("red-primary");
+    color: white;
+    padding: .5rem;
+    max-width: 80%;
+    
+    @include viewport-wide-start-from(getViewport("medium"), false) {
+        top: 5.5rem;
+    }
+
+    .common--icon__container {
+        position: relative;
+        top: 5px;
+    }
+}

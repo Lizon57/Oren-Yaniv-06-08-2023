@@ -10,6 +10,7 @@ import { setInitialSelectedCity } from "@/store/actions/weather.action"
 
 import { Loader } from "./cmps/common/loader/loader"
 import { AppHeader } from "./cmps/layout/app-header/app-header"
+import { ErrorPopup } from "./cmps/layout/error-popup/error-popup"
 
 import './styles/_main.scss'
 import './_app.scss'
@@ -35,6 +36,7 @@ export function App() {
           </Suspense>
         </div>
 
+        <ErrorPopup />
         <footer>&copy; Oren Yaniv 2023</footer>
       </Router>
     </div>

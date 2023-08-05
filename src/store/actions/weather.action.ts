@@ -1,8 +1,11 @@
 import isEqual from 'lodash/isEqual'
 import { store } from "../store"
 import { aweatherService } from "@/services/aweather.service"
+import { getErrorMessage } from '@/services/util/get-error-message'
+import { eventBus } from '@/services/event.bus.service'
 import { Location } from "@/models/location/location"
 import { CurrWeather } from '@/models/curr-weather'
+import { LocationForecast } from '@/models/forecast/location-forecast'
 import { INITIAL_SELECTED_CITY } from "@/constants/initial-selected-city"
 
 
@@ -28,7 +31,7 @@ export const setCurrWeather = (newWeather?: CurrWeather) => {
 }
 
 
-export const setFiveDayForecast = (newForecast?: CurrWeather) => {
+export const setFiveDayForecast = (newForecast?: LocationForecast) => {
     if (!newForecast) return
 
     const currForecast = store.getState().weatherModule.fiveDayForecast
@@ -51,8 +54,10 @@ export const setInitialSelectedCity = () => {
         try {
             const location = await aweatherService.getLocationByLatLon(userCoord.lat, userCoord.lon)
             setSelectedCity(location)
-        } catch (err) {
-            console.log(err)
+        } catch (error) {
+            setSelectedCity(INITIAL_SELECTED_CITY)
+            const errorMessage = getErrorMessage(error)
+            eventBus.emit('popErrorMessage', errorMessage)
         }
     }
 
