@@ -1,4 +1,4 @@
-export const INITIAL_SELECTED_CITY = {
+export const INITIAL_SELECTED_LOCATION = {
     id: '215854',
     name: 'Tel Aviv',
     country: {

@@ -25,10 +25,10 @@ export function ForecastPreview({ forecast, shouldRenderIcon }: Props) {
                     </div>
                 </div>
 
-                <div className="minmax-temperature">
-                    <Temperature value={forecast.temperature.minimum} />
+                <div className="minmax-temp">
+                    <Temperature value={forecast.temp.minimum} />
                     <span className="seperator">-</span>
-                    <Temperature value={forecast.temperature.maximum} shouldRenderIndicatorIcon />
+                    <Temperature value={forecast.temp.maximum} shouldRenderIndicatorIcon />
                 </div>
             </article>
         </>

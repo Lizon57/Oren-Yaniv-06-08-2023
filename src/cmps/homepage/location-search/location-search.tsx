@@ -7,7 +7,7 @@ import { aweatherService } from "@/services/aweather.service"
 import { stripStringToEnglishLetter } from "@/services/util/strip-string-to-english-letter"
 import { AutocompleteResponse } from "@/models/aweather-resopnses/autocomplete-response"
 
-import { setSelectedCity } from "@/store/actions/weather.action"
+import { setSelectedLocation } from "@/store/actions/weather.action"
 
 import { LocationSearchOption } from "@/models/location/location-search-option"
 import { Location } from "@/models/location/location"
@@ -55,11 +55,11 @@ export function LocationSearch() {
 
     const onSelcetOption = (option: SingleValue<LocationSearchOption>) => {
         if (!option) {
-            setSelectedCity()
+            setSelectedLocation()
             return
         }
 
-        const city: Location = {
+        const Location: Location = {
             id: option.value,
             name: option.label,
             country: {
@@ -67,7 +67,7 @@ export function LocationSearch() {
                 name: option.country.name
             }
         }
-        setSelectedCity(city)
+        setSelectedLocation(Location)
     }
 
     const validateInput = (value: string) => {

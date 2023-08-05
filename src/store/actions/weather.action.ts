@@ -6,17 +6,17 @@ import { eventBus } from '@/services/event.bus.service'
 import { Location } from "@/models/location/location"
 import { CurrWeather } from '@/models/curr-weather'
 import { LocationForecast } from '@/models/forecast/location-forecast'
-import { INITIAL_SELECTED_CITY } from "@/constants/initial-selected-city"
+import { INITIAL_SELECTED_LOCATION } from "@/constants/initial-selected-location"
 
 
-export const setSelectedCity = (city?: Location) => {
-    if (!city) return
+export const setSelectedLocation = (location?: Location) => {
+    if (!location) return
 
-    const currSelectedCity = store.getState().weatherModule.selectedCity
-    const isEqualCurrSelected = isEqual(currSelectedCity, city)
+    const currSelectedLocation = store.getState().weatherModule.selectedLocation
+    const isEqualCurrSelected = isEqual(currSelectedLocation, location)
     if (isEqualCurrSelected) return
 
-    store.dispatch({ type: 'setSelectedCity', city })
+    store.dispatch({ type: 'setSelectedLocation', location })
 }
 
 
@@ -42,7 +42,7 @@ export const setFiveDayForecast = (newForecast?: LocationForecast) => {
 }
 
 
-export const setInitialSelectedCity = () => {
+export const setInitialSelectedLocation = () => {
     navigator.geolocation.getCurrentPosition(onSuccessGetUserGeo, onFailGetUserGeo)
 
     async function onSuccessGetUserGeo(geo: GeolocationPosition) {
@@ -53,9 +53,9 @@ export const setInitialSelectedCity = () => {
 
         try {
             const location = await aweatherService.getLocationByLatLon(userCoord.lat, userCoord.lon)
-            setSelectedCity(location)
+            setSelectedLocation(location)
         } catch (error) {
-            setSelectedCity(INITIAL_SELECTED_CITY)
+            setSelectedLocation(INITIAL_SELECTED_LOCATION)
             const errorMessage = getErrorMessage(error)
             eventBus.emit('popErrorMessage', errorMessage)
         }
@@ -63,6 +63,6 @@ export const setInitialSelectedCity = () => {
 
 
     function onFailGetUserGeo() {
-        setSelectedCity(INITIAL_SELECTED_CITY)
+        setSelectedLocation(INITIAL_SELECTED_LOCATION)
     }
 }

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
 
-import { convertTemperatureUnit } from '@/services/util/convert-temperatur-unit'
+import { convertTempUnit } from '@/services/util/convert-temperatur-unit'
 
 import { Icon } from '../icon/icon'
 import './style.scss'
@@ -11,22 +11,22 @@ import './style.scss'
 
 export function Temperature({ value, shouldRenderIndicatorIcon = false, isCelsiusValue = true }: Props) {
     const isCelsiusPreffer = useSelector((state: RootState) => state.appModule.isCelsiusPreffer)
-    const [temperature, setTemperature] = useState<number>()
+    const [temp, setTemp] = useState<number>()
 
 
     useEffect(() => {
-        let newTemperature: number
+        let newTemp: number
 
-        if (isCelsiusPreffer) newTemperature = isCelsiusValue ? value : convertTemperatureUnit(value)
-        else newTemperature = isCelsiusValue ? convertTemperatureUnit(value) : value
+        if (isCelsiusPreffer) newTemp = isCelsiusValue ? value : convertTempUnit(value)
+        else newTemp = isCelsiusValue ? convertTempUnit(value) : value
 
-        setTemperature(newTemperature)
+        setTemp(newTemp)
     }, [value, isCelsiusPreffer])
 
 
     return (
         <span className="common--temperature__container">
-            {temperature}
+            {temp}
             {shouldRenderIndicatorIcon && <>
                 {isCelsiusPreffer
                     ? <Icon name="celsius-sign" size="20px" />

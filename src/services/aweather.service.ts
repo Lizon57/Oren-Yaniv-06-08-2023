@@ -9,7 +9,7 @@ import { CurrWeatherResponse } from '@/models/aweather-resopnses/curr-weather-re
 
 import { AWEATHER_BASE_URL } from '@/constants/aweather-base-url'
 
-import { convertTemperatureUnit } from './util/convert-temperatur-unit'
+import { convertTempUnit } from './util/convert-temperatur-unit'
 import { convertDateToDayName } from './util/convert-date-to-day-name'
 
 
@@ -338,6 +338,7 @@ const getLocationForecast = async (id: string) => {
 
 
 const getLocationCurrWeather = async (id: string) => {
+    // For debug: have current weather response for Tel-Aviv according to 04/08/2023
     const response: CurrWeatherResponse = [
         {
             "LocalObservationDateTime": "2023-08-05T15:42:00+03:00",
@@ -413,9 +414,9 @@ const _formatLocationForecast = (response: LocationForecastResponse) => ({
             icon: String(forecast.Night.Icon).padStart(2, '0'),
             text: forecast.Night.IconPhrase
         },
-        temperature: {
-            minimum: +convertTemperatureUnit(forecast.Temperature.Minimum.Value, true).toFixed(0),
-            maximum: +convertTemperatureUnit(forecast.Temperature.Maximum.Value, true).toFixed(0),
+        temp: {
+            minimum: +convertTempUnit(forecast.Temperature.Minimum.Value, true).toFixed(0),
+            maximum: +convertTempUnit(forecast.Temperature.Maximum.Value, true).toFixed(0),
         }
     }))
 })
@@ -429,7 +430,7 @@ const _formatLocationCurrWeather = (response: CurrWeatherResponse) => {
         weather: {
             icon: String(unwindResponse.WeatherIcon).padStart(2, '0'),
             text: unwindResponse.WeatherText,
-            celsiusTemp: +convertTemperatureUnit(unwindResponse.Temperature.Imperial.Value, true).toFixed(0)
+            celsiusTemp: +convertTempUnit(unwindResponse.Temperature.Imperial.Value, true).toFixed(0)
         },
     }
 

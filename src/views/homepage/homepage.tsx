@@ -10,14 +10,14 @@ import './style.scss'
 
 
 export default function Homepage() {
-    const selectedCity: Location = useSelector((state: RootState) => state.weatherModule.selectedCity)
+    const selectedLocation: Location = useSelector((state: RootState) => state.weatherModule.selectedLocation)
 
 
     return (
         <main className="views--homepage__container">
             <LocationSearch />
 
-            {selectedCity
+            {selectedLocation
                 ? <LocationPreview />
                 : <Loader text="Plase allow access to your location in order to get accurate result for you." />}
         </main>

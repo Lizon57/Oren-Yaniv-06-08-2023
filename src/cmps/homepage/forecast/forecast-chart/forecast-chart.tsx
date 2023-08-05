@@ -5,7 +5,7 @@ import { useSelector } from "react-redux"
 import { RootState } from "@/store/store"
 
 import { LocationForecast } from "@/models/forecast/location-forecast"
-import { convertTemperatureUnit } from "@/services/util/convert-temperatur-unit"
+import { convertTempUnit } from "@/services/util/convert-temperatur-unit"
 import './style.scss'
 
 
@@ -15,9 +15,9 @@ export function ForecastChart() {
 
     const getData = () => {
         return forecast.forecasts.map(forecast => isCelsiusPreffer
-            ? (forecast.temperature.minimum + forecast.temperature.maximum) / 2
-            : (convertTemperatureUnit(forecast.temperature.minimum)
-                + convertTemperatureUnit(forecast.temperature.maximum)) / 2
+            ? (forecast.temp.minimum + forecast.temp.maximum) / 2
+            : (convertTempUnit(forecast.temp.minimum)
+                + convertTempUnit(forecast.temp.maximum)) / 2
         )
     }
 

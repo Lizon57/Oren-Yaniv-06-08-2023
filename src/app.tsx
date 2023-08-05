@@ -6,7 +6,7 @@ import { useOnFirstRender } from "./hooks/use-on-first-render"
 
 import { routes } from "./routes/routes"
 
-import { setInitialSelectedCity } from "@/store/actions/weather.action"
+import { setInitialSelectedLocation } from "@/store/actions/weather.action"
 
 import { Loader } from "./cmps/common/loader/loader"
 import { AppHeader } from "./cmps/layout/app-header/app-header"
@@ -17,7 +17,7 @@ import './_app.scss'
 
 
 export function App() {
-  useOnFirstRender(setInitialSelectedCity)
+  useOnFirstRender(setInitialSelectedLocation)
 
 
   return (

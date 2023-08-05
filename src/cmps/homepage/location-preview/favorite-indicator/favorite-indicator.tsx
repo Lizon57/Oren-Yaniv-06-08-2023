@@ -12,16 +12,16 @@ import { favoriteService } from '@/services/favorite.service'
 
 
 export function FavoriteIndicator() {
-    const selectedCity: Location = useSelector((state: RootState) => state.weatherModule.selectedCity)
+    const selectedLocation: Location = useSelector((state: RootState) => state.weatherModule.selectedLocation)
     const [isFavorite, setIsFavorite] = useState<boolean>()
 
     useEffect(() => {
-        const isFavorite = favoriteService.getIsFavoriteLocation(selectedCity.id)
+        const isFavorite = favoriteService.getIsFavoriteLocation(selectedLocation.id)
         setIsFavorite(isFavorite)
     })
 
     const toggleIsFavorite = () => {
-        favoriteService.toggleFavorite(selectedCity)
+        favoriteService.toggleFavorite(selectedLocation)
         setIsFavorite(!isFavorite)
     }
 

@@ -8,7 +8,7 @@ export type Forecast = {
         icon: string
         text: string
     }
-    temperature: {
+    temp: {
         minimum: number
         maximum: number
     }

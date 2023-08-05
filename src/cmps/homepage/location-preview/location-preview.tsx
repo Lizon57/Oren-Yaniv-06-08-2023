@@ -21,7 +21,7 @@ import './style.scss'
 
 
 export function LocationPreview() {
-    const selectedCity: Location = useSelector((state: RootState) => state.weatherModule.selectedCity)
+    const selectedLocation: Location = useSelector((state: RootState) => state.weatherModule.selectedLocation)
     const currWeather: CurrWeather = useSelector((state: RootState) => state.weatherModule.currWeather)
 
     const [isLoading, setIsLoading] = useState(true)
@@ -43,14 +43,14 @@ export function LocationPreview() {
     }
 
     useEffect(() => {
-        fetchData(selectedCity.id)
-    }, [selectedCity])
+        fetchData(selectedLocation.id)
+    }, [selectedLocation])
 
 
     if (isLoading) return <Loader />
     if (error) return <ErrorMessage message={error} />
 
-    const locationWithWeather: LocationWithCurrWeather = { ...selectedCity, ...currWeather }
+    const locationWithWeather: LocationWithCurrWeather = { ...selectedLocation, ...currWeather }
 
     return (
         <div className="homepage--location-preview__container">
