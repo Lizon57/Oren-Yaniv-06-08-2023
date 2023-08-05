@@ -85,7 +85,7 @@ export function LocationSearch() {
     return (
         <section className="homepage--location-search__container" title="Search a location">
             <AsyncSelect
-                className={classNames({ unValidInput: !isValid })}
+                className={classNames({ 'unvalid-input': !isValid })}
                 loadOptions={debouncedLoadOptions}
                 styles={customStyles}
                 formatOptionLabel={option => <LocationSearchPreview option={option as LocationSearchOption} />}

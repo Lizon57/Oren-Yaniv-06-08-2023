@@ -1,4 +1,5 @@
 @import "/src/styles/variables/import";
+@import "/src/styles/mixins/import";
 @import "/src/styles/animations/import";
 
 
@@ -17,13 +18,23 @@
     width: max-content;
 
     .indicator {
-        margin-inline-end: 2rem;
+        @include viewport-wide-start-from(getViewport("medium"), false) {
+            margin-inline-end: 2rem;
+        }
+        
+        @include viewport-wide-up-to(getViewport("medium")) {
+            padding-inline-start: 2rem;
+        }
     }
 
     .common--icon__container {
         position: absolute;
-        top: -4px;
-        right: -10px;
+        top: 0;
+
+        @include viewport-wide-start-from(getViewport("medium"), false) {
+            top: -4px;
+            right: -10px;
+        }
 
         &.favorite {
             color: getColor("red-primary");

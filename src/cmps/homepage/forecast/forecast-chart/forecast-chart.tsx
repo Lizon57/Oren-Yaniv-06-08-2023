@@ -6,7 +6,7 @@ import { RootState } from "@/store/store"
 
 import { LocationForecast } from "@/models/forecast/location-forecast"
 import { convertTemperatureUnit } from "@/services/util/convert-temperatur-unit"
-
+import './style.scss'
 
 
 export function ForecastChart() {

@@ -1,0 +1,11 @@
+@import "/src/styles/variables/import";
+
+.homepage--forecast-chart__container {
+    max-height: 10rem;
+
+    h3 {
+        font-family: getTypography("emphasis");
+        text-align: center;
+        margin-block-start: 2rem;
+    }
+}

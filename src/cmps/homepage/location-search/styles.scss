@@ -1,11 +1,16 @@
 @import "/src/styles/variables/import";
+@import "/src/styles/mixins/import";
 
 
 .homepage--location-search__container {
     margin-block-end: 2rem;
-    width: 40%;
+    width: 100%;
 
-    .unValidInput {
+    @include viewport-wide-start-from(getViewport("medium"), false) {
+        width: 50%;
+    }
+
+    .unvalid-input {
         border-radius: 6px;
         border: 1px solid getColor("error-primary");
         box-shadow: 0 2px 10px rgba(getColor("error-primary"), 0.3);

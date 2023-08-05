@@ -11,7 +11,7 @@ import { CurrWeather } from '@/models/curr-weather'
 import { LocationWithCurrWeather } from '@/models/location/location-with-curr-weather'
 
 import { FavoriteIndicator } from './favorite-indicator/favorite-indicator'
-import { ForecastList } from '@/cmps/homepage/forecast/forcast-list'
+import { ForecastList } from '@/cmps/homepage/forecast/forecast-list/forcast-list'
 import { CelsiusFahrenheitToggler } from '@/cmps/common/celsius-fahrenheit-toggler/celsius-fahrenheit-toggler'
 import { LocationCurrWeatherPreview } from '@/cmps/common/location-curr-weather-preview/location-curr-weather-preview'
 import './style.scss'

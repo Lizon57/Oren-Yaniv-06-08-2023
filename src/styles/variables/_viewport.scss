@@ -3,10 +3,8 @@
 
 $viewport: (
     "tiny": 500,
-    "small": 768,
-    "medium": 1160,
+    "medium": 700,
     "large": 1264,
-    "wide": 1920
 );
 
 @function getViewport($name) {
@@ -17,6 +15,6 @@ $viewport: (
     }
 
     @else {
-        @return 1920;
+        @return 700;
     }
 }

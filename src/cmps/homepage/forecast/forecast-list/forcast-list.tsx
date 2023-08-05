@@ -5,8 +5,8 @@ import { RootState } from "@/store/store"
 
 import { LocationForecast } from '@/models/forecast/location-forecast'
 
-import { ForecastPreview } from './forecast-preview'
-import { ForecastChart } from "./forecast-chart"
+import { ForecastPreview } from '../forecast-preview/forecast-preview'
+import { ForecastChart } from "../forecast-chart/forecast-chart"
 import './style.scss'
 
 

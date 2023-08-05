@@ -24,7 +24,7 @@ export function App() {
       <Router>
         <AppHeader />
 
-        <div className="content">
+        <div className="app-content">
           <Suspense fallback={<Loader />}>
             <Routes>
               {routes.map(({ id, path, element: Element }) => <Route

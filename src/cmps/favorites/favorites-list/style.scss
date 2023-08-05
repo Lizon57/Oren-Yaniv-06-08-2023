@@ -1,4 +1,5 @@
 @import '/src/styles/variables/import';
+@import '/src/styles/mixins/import';
 
 
 .favorites--favorites-list__container {
@@ -11,8 +12,8 @@
 
         .icon-wrapper {
             position: absolute;
-            right: -.5rem;
             top: -.5rem;
+            right: 0;
 
             cursor: pointer;
             border-radius: 50vw;
@@ -20,6 +21,10 @@
             background-color: white;
             height: 2rem;
             width: 2rem;
+
+            @include viewport-wide-start-from(getViewport("medium"), false) {
+                right: -.5rem;
+            }
 
             .common--icon__container {
                 position: absolute;

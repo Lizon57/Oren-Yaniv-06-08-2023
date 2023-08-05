@@ -1,0 +1,95 @@
+@import "/src/styles/variables/import";
+@import "/src/styles/mixins/import";
+
+
+.homepage--forecast-preview__container {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+
+    border-radius: 10px;
+    border: 1px solid getColor("border-secondary");
+    padding: .5rem;
+
+    @include viewport-wide-up-to(getViewport("medium")) {
+        flex-wrap: wrap;
+
+        &:nth-child(even) {
+            border-color: getColor("border-primary");
+            background-color: rgba(getColor("background-seprate"), 0.2);
+        }
+    }
+
+    @include viewport-wide-start-from(getViewport("medium"), false) {
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .day-name {
+        flex-grow: 1;
+    }
+
+    img {
+        display: block;
+
+        width: 4rem;
+        object-fit: contain;
+
+        @include viewport-wide-start-from(getViewport("medium"), false) {
+            width: 5rem;
+        }
+    }
+
+    .textual {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 100%;
+        gap: .5rem;
+
+        .day {
+            color: getColor("title-primary");
+            font-size: 1.1rem;
+
+            @include viewport-wide-start-from(getViewport("medium"), false) {
+                font-size: 1.2rem;
+                font-weight: 600;
+            }
+        }
+
+        .night {
+            color: getColor("text-secondary");
+            font-size: .9rem;
+        }
+
+        .day,
+        .night {
+            position: relative;
+
+            @include viewport-wide-up-to(getViewport("medium")) {
+                padding-inline-start: 1.5rem;
+            }
+
+            @include viewport-wide-start-from(getViewport("medium"), false) {
+                width: 100%;
+                text-align: center;
+            }
+
+            .common--icon__container {
+                position: absolute;
+                top: 3px;
+                left: 0;
+
+                @include viewport-wide-start-from(getViewport("medium"), false) {
+                    top: 25%;
+                    left: -1rem;
+                }
+            }
+        }
+    }
+
+    .minmax-temperature {
+        .seperator {
+            margin-inline: .5rem;
+        }
+    }
+}
