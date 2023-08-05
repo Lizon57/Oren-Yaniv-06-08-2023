@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import logo from '@/assets/images/logo.png'
 import './style.scss'
-import { CelsiusFahrenheitToggler } from './celsius-fahrenheit-toggler/celsius-fahrenheit-toggler'
+import { CelsiusFahrenheitToggler } from '../../common/celsius-fahrenheit-toggler/celsius-fahrenheit-toggler'
 
 
 export function AppHeader() {

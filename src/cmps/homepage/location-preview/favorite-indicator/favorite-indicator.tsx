@@ -1,28 +1,40 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import classNames from 'classnames'
+
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store/store'
+
+import { Location } from '@/models/location/location'
 
 import { Icon } from '@/cmps/common/icon/icon'
 import './style.scss'
+import { favoriteService } from '@/services/favorite.service'
 
 
-export function FavoriteIndicator({ initialState }: Props) {
-    const [isFavorite, setIsFavorite] = useState(initialState)
-    const toggleIsFavorite = () => setIsFavorite(!isFavorite)
+export function FavoriteIndicator() {
+    const selectedCity: Location = useSelector((state: RootState) => state.weatherModule.selectedCity)
+    const [isFavorite, setIsFavorite] = useState<boolean>()
+
+    useEffect(() => {
+        const isFavorite = favoriteService.getIsFavoriteLocation(selectedCity.id)
+        setIsFavorite(isFavorite)
+    })
+
+    const toggleIsFavorite = () => {
+        favoriteService.toggleFavorite(selectedCity)
+        setIsFavorite(!isFavorite)
+    }
 
 
     return (
         <button className="homepage--favorite-indicator__container" onClick={toggleIsFavorite}>
+            <span className="indicator">{isFavorite ? 'Remove from' : 'Add to'} Favorites</span>
             <Icon
                 name={isFavorite ? 'heart-full' : 'heart-outline'}
                 classList={classNames({ favorite: isFavorite })}
                 size="32"
-                title={`${(isFavorite ? 'Favorite' : 'Unfavorite')}`}
+                title={isFavorite ? 'Favorite' : 'Unfavorite'}
             />
         </button>
     )
-}
-
-
-type Props = {
-    initialState: boolean
 }

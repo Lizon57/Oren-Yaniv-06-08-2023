@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import { RootState } from "@/store/store"
 
-import { SelectedCity } from "@/models/selected-city"
+import { Location } from "@/models/location/location"
 
 import { LocationSearch } from "@/cmps/homepage/location-search/location-search"
 import { Loader } from "@/cmps/common/loader/loader"
@@ -10,7 +10,7 @@ import './style.scss'
 
 
 export default function Homepage() {
-    const selectedCity: SelectedCity = useSelector((state: RootState) => state.weatherModule.selectedCity)
+    const selectedCity: Location = useSelector((state: RootState) => state.weatherModule.selectedCity)
 
 
     return (

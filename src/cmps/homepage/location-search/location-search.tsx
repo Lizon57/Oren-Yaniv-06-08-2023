@@ -9,8 +9,8 @@ import { AutocompleteResponse } from "@/models/aweather-resopnses/autocomplete-r
 
 import { setSelectedCity } from "@/store/actions/weather.action"
 
-import { LocationSearchOption } from "@/models/location-search-option"
-import { SelectedCity } from "@/models/selected-city"
+import { LocationSearchOption } from "@/models/location/location-search-option"
+import { Location } from "@/models/location/location"
 
 import { Icon } from "@/cmps/common/icon/icon"
 import { LocationSearchPreview } from "./location-search-preview"
@@ -59,7 +59,7 @@ export function LocationSearch() {
             return
         }
 
-        const city: SelectedCity = {
+        const city: Location = {
             id: option.value,
             name: option.label,
             country: {
@@ -107,7 +107,7 @@ export function LocationSearch() {
 function Placeholder() {
     return (
         <div className="homepage--location-search__placeholder">
-            <Icon name="location" size="22" />
+            <Icon name="location" size="22px" />
             <span className="text">Search for a city</span>
         </div>
     )

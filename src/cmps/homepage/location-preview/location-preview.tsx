@@ -6,18 +6,19 @@ import { setCurrWeather, setFiveDayForecast } from '@/store/actions/weather.acti
 
 import { aweatherService } from '@/services/aweather.service'
 
-import { SelectedCity } from '@/models/selected-city'
+import { Location } from '@/models/location/location'
 import { CurrWeather } from '@/models/curr-weather'
+import { LocationWithCurrWeather } from '@/models/location/location-with-curr-weather'
 
 import { FavoriteIndicator } from './favorite-indicator/favorite-indicator'
 import { ForecastList } from '@/cmps/homepage/forecast/forcast-list'
-import { CurrWeatherPreview } from './curr-weather-preview/curr-weather-preview'
+import { CelsiusFahrenheitToggler } from '@/cmps/common/celsius-fahrenheit-toggler/celsius-fahrenheit-toggler'
+import { LocationCurrWeatherPreview } from '@/cmps/common/location-curr-weather-preview/location-curr-weather-preview'
 import './style.scss'
-import { CelsiusFahrenheitToggler } from '@/cmps/layout/app-header/celsius-fahrenheit-toggler/celsius-fahrenheit-toggler'
 
 
 export function LocationPreview() {
-    const selectedCity: SelectedCity = useSelector((state: RootState) => state.weatherModule.selectedCity)
+    const selectedCity: Location = useSelector((state: RootState) => state.weatherModule.selectedCity)
     const currWeather: CurrWeather = useSelector((state: RootState) => state.weatherModule.currWeather)
 
 
@@ -38,13 +39,15 @@ export function LocationPreview() {
 
     if (!currWeather) return <></>
 
+    const locationWithWeather: LocationWithCurrWeather = { ...selectedCity, ...currWeather }
+
     return (
         <div className="homepage--location-preview__container">
             <section className="info">
-                <CurrWeatherPreview />
+                <LocationCurrWeatherPreview location={locationWithWeather} />
 
                 <div className="options">
-                    <FavoriteIndicator initialState={false} />
+                    <FavoriteIndicator />
                     <CelsiusFahrenheitToggler />
                 </div>
             </section>

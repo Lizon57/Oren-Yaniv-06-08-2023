@@ -1,10 +1,13 @@
 @import "/src/styles/variables/import";
 
 
-.homepage--curr-weather__container {
+.common--location-curr-weather-preview__container {
     display: flex;
     gap: 1rem;
 
+    border: 1px solid getColor("border-primary");
+    border-radius: .5rem;
+    padding: .5rem;
     width: 100%;
 
     img {
@@ -18,13 +21,10 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        gap: .3rem;
-
-        flex-grow: 1;
+        gap: .5rem;
 
         .name {
-            display: flex;
-            align-items: baseline;
+            word-break: break-all;
 
             .city {
                 font-size: 1.3rem;
@@ -33,7 +33,6 @@
 
             .country {
                 color: getColor("text-secondary");
-                font-size: .8rem;
                 margin-inline-start: 1ch;
 
                 img {

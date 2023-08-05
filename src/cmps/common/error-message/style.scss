@@ -1,0 +1,22 @@
+@import "/src/styles/variables/import";
+
+
+.common--error-message__container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    text-align: center;
+
+    .common--icon__container {
+        position: relative;
+        top: 1rem;
+        left: 1rem;
+    }
+
+    .text {
+        font-family: getTypography("emphasis");
+        max-width: 15rem;
+    }
+}

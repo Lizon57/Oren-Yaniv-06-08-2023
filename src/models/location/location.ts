@@ -1,4 +1,4 @@
-export type SelectedCity = {
+export type Location = {
     id: string
     name: string
     country: {

@@ -13,12 +13,12 @@ export function ForecastPreview({ forecast, shouldRenderIcon }: Props) {
                 <img src={`https://developer.accuweather.com/sites/default/files/${forecast.day.icon}-s.png`} />
 
                 <div className="day-textual">
-                    {shouldRenderIcon && <Icon name="sun-outline" size="20" />}
+                    {shouldRenderIcon && <Icon name="sun-outline" size="20px" />}
                     {forecast.day.text}
                 </div>
 
                 <div className="night-textual">
-                    {shouldRenderIcon && <Icon name="moon-full" size="20" />}
+                    {shouldRenderIcon && <Icon name="moon-full" size="20px" />}
                     {forecast.night.text}
                 </div>
 

@@ -29,8 +29,8 @@ export function Temperature({ value, shouldRenderIndicatorIcon = false, isCelsiu
             {temperature}
             {shouldRenderIndicatorIcon && <>
                 {isCelsiusPreffer
-                    ? <Icon name="celsius-sign" size="20" />
-                    : <Icon name="fahrenheit-sign" size="20" />}
+                    ? <Icon name="celsius-sign" size="20px" />
+                    : <Icon name="fahrenheit-sign" size="20px" />}
             </>
             }
         </span>

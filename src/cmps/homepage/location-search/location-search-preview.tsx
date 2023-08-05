@@ -1,4 +1,4 @@
-import { LocationSearchOption } from "@/models/location-search-option"
+import { LocationSearchOption } from "@/models/location/location-search-option"
 import './styles.scss'
 
 

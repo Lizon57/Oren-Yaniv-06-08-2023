@@ -2,7 +2,7 @@ import { INITIAL_SELECTED_CITY } from "@/constants/initial-selected-city"
 import { CurrWeather } from "@/models/curr-weather"
 import { LocationForecast } from "@/models/forecast/location-forecast"
 import { ReduxAction } from "@/models/redux-action"
-import { SelectedCity } from "@/models/selected-city"
+import { Location } from "@/models/location/location"
 
 
 const initialState: WeatherReducer = {
@@ -30,7 +30,7 @@ export const weatherReducer = (state = initialState, action: ReduxAction) => {
 
 
 type WeatherReducer = {
-    selectedCity?: SelectedCity
+    selectedCity?: Location
     currWeather?: CurrWeather
     fiveDayForecast?: LocationForecast
 }

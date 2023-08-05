@@ -1,12 +1,12 @@
 import isEqual from 'lodash/isEqual'
 import { store } from "../store"
 import { aweatherService } from "@/services/aweather.service"
-import { SelectedCity } from "@/models/selected-city"
+import { Location } from "@/models/location/location"
 import { CurrWeather } from '@/models/curr-weather'
 import { INITIAL_SELECTED_CITY } from "@/constants/initial-selected-city"
 
 
-export const setSelectedCity = (city?: SelectedCity) => {
+export const setSelectedCity = (city?: Location) => {
     if (!city) return
 
     const currSelectedCity = store.getState().weatherModule.selectedCity

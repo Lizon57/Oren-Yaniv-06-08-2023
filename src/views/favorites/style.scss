@@ -1,0 +1,21 @@
+@import '/src/styles/variables/import';
+
+
+.views--favorites__container {
+    h2 {
+        position: relative;
+
+        color: getColor("title-primary");
+        font-family: getTypography("emphasis");
+        padding-inline-start: 1.5rem;
+        margin-block-end: 1rem;
+
+        .common--icon__container {
+            position: absolute;
+            top: 5px;
+            left: 0;
+
+            color: getColor("red-primary")
+        }
+    }
+}

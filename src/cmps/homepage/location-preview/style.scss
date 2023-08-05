@@ -10,12 +10,17 @@
         margin-block-end: 3rem;
         width: 100%;
 
+        .common--location-curr-weather-preview__container {
+            max-width: 25rem;
+        }
+
         .options {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
+            gap: 1rem;
 
-            .layout--celsius-fahrenheit-toggler__container {
+            .layout--icons-toggler__container {
                 border-color: getColor("border-primary");
             }
         }
