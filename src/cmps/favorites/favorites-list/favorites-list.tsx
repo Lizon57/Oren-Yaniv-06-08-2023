@@ -11,7 +11,8 @@ import './style.scss'
 export function FavoritesList({ locations }: Props) {
     const navigate = useNavigate()
 
-    const onRemoveFromFavorites = (location: LocationWithCurrWeather) => {
+    const onRemoveFromFavorites = (ev: React.MouseEvent<HTMLElement>, location: LocationWithCurrWeather) => {
+        ev.stopPropagation()
         favoriteService.toggleFavorite(location)
         eventBus.emit('reloadFavoritesList')
     }
@@ -27,9 +28,9 @@ export function FavoritesList({ locations }: Props) {
             {locations?.map(location => <div
                 key={location.id}
                 className="preview-wrapper"
-                onClick={() => onSelectFavorite(location)}
+                onClick={(ev) => onSelectFavorite(location)}
             >
-                <span className="icon-wrapper" onClick={() => onRemoveFromFavorites(location)}>
+                <span className="icon-wrapper" onClick={(ev) => onRemoveFromFavorites(ev, location)}>
                     <Icon name="remove-full" size="25px" title="Remove from favorites" />
                 </span>
 
