@@ -57,7 +57,7 @@ export function ForecastChart() {
 
     return (
         <section className="homepage--forecast-chart__container">
-            <h3>Average temperaturs chart</h3>
+            <h3>Average temperature chart</h3>
 
             <Line options={options} data={data} />
         </section>
