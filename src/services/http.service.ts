@@ -12,6 +12,9 @@ async function ajax(endpoint: string, method = 'GET', data: null | any = null) {
             method,
             data: (method === 'GET') ? null : data,
             params: (method === 'GET') ? data : null,
+            headers: {
+                Origin: 'https://abraweather.onrender.com/'
+            }
         })
         return res.data
     } catch (err) {
