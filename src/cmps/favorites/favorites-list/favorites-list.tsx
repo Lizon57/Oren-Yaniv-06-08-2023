@@ -28,7 +28,7 @@ export function FavoritesList({ locations }: Props) {
             {locations?.map(location => <div
                 key={location.id}
                 className="preview-wrapper"
-                onClick={(ev) => onSelectFavorite(location)}
+                onClick={() => onSelectFavorite(location)}
             >
                 <span className="icon-wrapper" onClick={(ev) => onRemoveFromFavorites(ev, location)}>
                     <Icon name="remove-full" size="25px" title="Remove from favorites" />
